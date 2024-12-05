@@ -1,0 +1,925 @@
+<html><head>
+  <title>Moonsveil</title>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="res/moonsveil.png">
+  <style>
+  :root {
+    --primary: #2a2d3e;
+    --secondary: #1a1b26;
+    --accent: #7aa2f7;
+    --text: #c0caf5;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  body {
+    background: var(--secondary);
+    color: var(--text);
+  }
+  
+  .navbar {
+    background: rgba(42, 45, 62, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo img {
+    height: 30px; /* Slightly reduced from 35px */
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .nav-link {
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(42, 45, 62, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: var(--text);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-content a:hover {
+    background: var(--accent);
+    color: var(--secondary);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    color: var(--accent);
+  }
+  
+  .hero {
+    padding-top: 100px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .hero img {
+    max-width: 500px; /* Increased from 400px */
+    width: 90%;
+  }
+  
+  .hero-text {
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .hero-text img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .hero-text p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(45deg, #7aa2f7, #bb9af7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  
+  .features {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .discover-section {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+  }
+  
+  .discover-title {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .discover-title .gradient {
+    background: linear-gradient(45deg, #7dcfff, #bb9af7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  
+  .discover-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .feature-box {
+    background: var(--primary);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(122, 162, 247, 0.1);
+  }
+  
+  .feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(122, 162, 247, 0.3);
+  }
+  
+  .feature-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .gradient-title {
+    background: linear-gradient(45deg, #7dcfff, #bb9af7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1rem;
+    font-weight: bold; /* Added bold */
+  }
+  
+  .feature-box:nth-child(1) .gradient-title {
+    background: linear-gradient(45deg, #f7768e, #ff9cac);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .feature-box:nth-child(2) .gradient-title {
+    background: linear-gradient(45deg, #7dcfff, #7aa2f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .feature-box:nth-child(3) .gradient-title {
+    background: linear-gradient(45deg, #bb9af7, #9d7cd8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .gradient-title {
+    background: linear-gradient(45deg, #7dcfff, #bb9af7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1rem;
+    font-weight: bold; /* Added bold */
+  }
+  
+  .feature-box p {
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.9;
+  }
+  
+  .team {
+    padding: 4rem 2rem;
+    text-align: center;
+    margin-top: -2rem; /* Move it up a bit */
+  }
+  
+  .team h2 {
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(45deg, #7dcfff, #bb9af7, #7aa2f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgba(122, 162, 247, 0.2);
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .team-member {
+    background: var(--primary);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.5s ease, border 0.3s ease;
+    border: 1px solid rgba(122, 162, 247, 0.1);
+  }
+  
+  .team-member img {
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    border-radius: 10px; /* Optional: adds rounded corners */
+    object-fit: cover; /* Maintains aspect ratio while covering area */
+    margin-bottom: 1rem; /* Adds some space below the image */
+    transition: transform 0.3s ease; /* Smooth transform animation */
+  }
+  
+  .team-member img:hover {
+    transform: scale(1.05); /* Optional: Add hover effect for images */
+  }
+  
+  .team-member[data-role="owner"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 0 30px rgba(139, 0, 0, 0.3),
+      0 0 60px rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+  }
+  
+  .team-member[data-role="co-owner"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 0 30px rgba(32, 178, 170, 0.3),
+      0 0 60px rgba(0, 0, 255, 0.2);
+    border: 1px solid rgba(0, 0, 255, 0.3);
+  }
+  
+  .team-member[data-role="project-executive"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 0 30px rgba(255, 165, 0, 0.3),
+      0 0 60px rgba(255, 69, 0, 0.2);
+    border: 1px solid rgba(255, 69, 0, 0.3);
+  }
+  
+  .team-member[data-role="moderator"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 0 30px rgba(135, 206, 235, 0.3),
+      0 0 60px rgba(0, 0, 139, 0.2);
+    border: 1px solid rgba(0, 0, 139, 0.3);
+  }
+  
+  .team-member[data-role="website-developer"] p:first-of-type {
+    background: linear-gradient(45deg, #9d4edd, #7b2cbf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .team-member[data-role="website-developer"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 0 30px rgba(157, 78, 221, 0.3),
+      0 0 60px rgba(123, 44, 191, 0.2);
+    border: 1px solid rgba(157, 78, 221, 0.3);
+  }
+  
+  .team-member p:first-of-type {
+    font-size: 1.1rem;
+    margin: 1.5rem 0; /* Added spacing above and below role */
+  }
+  
+  .team-member[data-role="owner"] p:first-of-type {
+    background: linear-gradient(45deg, #8B0000, #FF0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .team-member[data-role="co-owner"] p:first-of-type {
+    background: linear-gradient(45deg, #20B2AA, #0000FF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .team-member[data-role="project-executive"] p:first-of-type {
+    background: linear-gradient(45deg, #FFA500, #FF0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .team-member[data-role="moderator"] p:first-of-type {
+    background: linear-gradient(45deg, #87CEEB, #00008B);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .team-member-quote {
+    font-style: italic;
+    color: #888;
+    margin-top: 1.5rem;
+  }
+  
+  .donate {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .donate-title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, #f7768e, #ff9cac);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(247, 118, 142, 0.3);
+  }
+  
+  .donate-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .org-gradient {
+    background: linear-gradient(45deg, #7dcfff, #7aa2f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  
+  .support-gradient {
+    background: linear-gradient(45deg, #bb9af7, #7aa2f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  
+  .sponsor-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    margin: 2rem 0;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #f7768e, #ff9cac);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(247, 118, 142, 0.3);
+  }
+  
+  .sponsor-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(247, 118, 142, 0.5);
+  }
+  
+  .heart-icon {
+    fill: currentColor;
+  }
+  
+  .thank-you {
+    font-size: 1.2rem;
+    margin: 2rem 0 2rem; /* Changed from 1rem 0 2rem to add more top margin */
+    background: linear-gradient(45deg, #f7768e, #ff9cac);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(247, 118, 142, 0.5);
+    filter: drop-shadow(0 0 5px rgba(247, 118, 142, 0.3));
+  }
+  
+  .donate-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .alternative-text {
+    color: var(--text);
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  
+  .donate-button {
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    background: var(--accent);
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(122, 162, 247, 0.3); /* Added blue glow */
+  }
+  
+  .donate-button:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 30px rgba(122, 162, 247, 0.5); /* Enhanced glow on hover */
+  }
+  
+  .tos {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .tos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+  }
+  
+  .tos-title {
+    flex: 1;
+  }
+  
+  .tos-title h2 {
+    flex: 1;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  
+  .tos-title h1 {
+    font-size: 3rem;
+    background: linear-gradient(45deg, #7dcfff, #7aa2f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .tos-acceptance {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .tos-acceptance p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .crucial-gradient {
+    background: linear-gradient(45deg, #f7768e, #bb9af7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  
+  .tos-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .tos h3 {
+    margin: 1.5rem 0 0.5rem;
+  }
+  
+  .tos p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Updated the term-box styles with transitions and hover effects */
+  .term-box {
+    background: rgba(42, 45, 62, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(122, 162, 247, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+    transition: all 0.3s ease; /* Add smooth transition for all properties */
+  }
+  
+  /* Add hover effects for the term boxes */
+  .term-box:hover {
+    transform: translateY(-5px) scale(1.02); /* Slight lift and scale effect */
+    box-shadow: 
+      0 0 30px rgba(122, 162, 247, 0.3),
+      0 0 60px rgba(187, 154, 247, 0.2);
+    border: 1px solid rgba(122, 162, 247, 0.3);
+    background: rgba(42, 45, 62, 0.85); /* Slightly more opaque on hover */
+  }
+  
+  /* Make the title more prominent on hover */
+  .term-box:hover h3 {
+    background: linear-gradient(45deg, #7aa2f7, #bb9af7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transform: translateX(5px); /* Slight shift right */
+    transition: all 0.3s ease;
+  }
+  
+  /* Enhance paragraph text on hover */
+  .term-box:hover p {
+    color: #ffffff; /* Brighter text on hover */
+    transition: color 0.3s ease;
+  }
+  
+  .footer {
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-text {
+    flex: 1;
+  }
+  
+  .footer-text h2 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-text .together {
+    background: linear-gradient(45deg, #7dcfff, #7aa2f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  
+  .footer-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .download-button {
+    background: linear-gradient(45deg, #7dcfff, #7aa2f7);
+    color: white;
+    box-shadow: 0 0 20px rgba(122, 162, 247, 0.3);
+  }
+  
+  .download-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(122, 162, 247, 0.5);
+  }
+  
+  .discord-button {
+    background: #7289DA;
+    color: white;
+    box-shadow: 0 0 20px rgba(114, 137, 218, 0.3);
+  }
+  
+  .discord-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(114, 137, 218, 0.5);
+  }
+  
+  .discord-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+  
+  .built-with {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+  }
+  
+  .moonsveil {
+    background: linear-gradient(45deg, #7dcfff, #bb9af7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(122, 162, 247, 0.3);
+    filter: drop-shadow(0 0 10px rgba(122, 162, 247, 0.5));
+  }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="res/moonsveil.png" alt="Moonsveil Logo">
+      </div>
+      <div class="nav-links">
+        <a href="https://moonsveil.qrexxed.me" class="nav-link">Home</a>
+        <a href="https://moonsveil.qrexxed.me/devlog.html" class="nav-link">Devlog</a>
+        <a href="https://moonsveil.qrexxed.me/download.html" class="nav-link">Downloads</a>
+        <a href="https://moonsveil.qrexxed.me/gratitude-list.html" class="nav-link">Gratitude List</a>
+        <div class="dropdown">
+          <button class="nav-link dropbtn">Donation</button>
+          <div class="dropdown-content">
+            <a href="https://ko-fi.com/moonsveil">Ko-fi</a>
+            <a href="https://boosty.to/moonsveil">Boosty</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  
+    <section class="hero">
+      <img src="res/hero.png" alt="Moonsveil Hero">
+      <div class="hero-text">
+        <h1>Better GameFlow for Players <img src="res/star.svg" alt="Star"></h1>
+        <p>Blockman Go but <span class="gradient-text">Community Driven</span>, better security, and exceptional player experience.</p>
+      </div>
+    </section>
+  
+    <section class="features">
+      <div class="discover-section">
+        <h2 class="discover-title">
+          Discover the <span class="gradient">Future</span>
+        </h2>
+        <p class="discover-text">
+          For gamers, creators, and adventurers, we've refined every game mode and challenge to deliver the ultimate sandbox experience—more immersive, more dynamic, and brimming with endless creativity.
+        </p>
+      </div>
+  
+      <div class="feature-grid">
+        <div class="feature-box">
+          <h3>Modernized UI<br>
+            <span class="gradient-title">A Fresh Look for Enhanced Play</span>
+          </h3>
+          <p>Enjoy an intuitive, streamlined interface designed to make navigation effortless and gameplay seamless. The updated UI ensures easy access to features, offering a smoother, more engaging experience for all players.</p>
+        </div>
+  
+        <div class="feature-box">
+          <h3>New Updates & Games<br>
+            <span class="gradient-title">Fresh Content at Your Fingertips</span>
+          </h3>
+          <p>Blockman Forge consistently delivers exciting updates and new games, keeping the community energized. Dive into innovative mechanics and explore unique challenges with every release.</p>
+        </div>
+  
+        <div class="feature-box">
+          <h3>Weekly Balancing<br>
+            <span class="gradient-title">Fair Play for Everyone</span>
+          </h3>
+          <p>Our dedicated team fine-tunes gameplay every week, adjusting character abilities and mechanics to maintain balance. This ongoing commitment ensures a competitive, fun, and fair environment for all players.</p>
+        </div>
+      </div>
+    </section>
+  
+    <section id="team" class="team">
+      <h2>Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member" data-role="owner">
+          <img src="res/drej.png" alt="Drej">
+          <h3>Drej (Axton)</h3>
+          <p>Owner</p>
+          <p class="team-member-quote">"A huge thank you to our amazing community! Together, we're building something extraordinary."</p>
+        </div>
+        <div class="team-member" data-role="co-owner">
+          <img src="res/rchyx.png" alt="Rchyx">
+          <h3>Rchyx</h3>
+          <p>Co Owner</p>
+          <p class="team-member-quote">"Together, we're cooking something truly special in Blockman Forge!"</p>
+        </div>
+        <div class="team-member" data-role="co-owner">
+          <img src="res/zvyne.png" alt="Zvyne">
+          <h3>Zvyne</h3>
+          <p>Co Owner</p>
+          <p class="team-member-quote">"Every day, our community amazes me with their dedication and creativity."</p>
+        </div>
+        <div class="team-member" data-role="project-executive">
+          <img src="res/neluxe.png" alt="Neluxe">
+          <h3>Neluxe</h3>
+          <p>Project Executive</p>
+          <p class="team-member-quote">"Excited to bring new features and improvements to enhance your gaming experience!"</p>
+        </div>
+        <div class="team-member" data-role="moderator">
+          <img src="res/arief.png" alt="Arief">
+          <h3>Arief</h3>
+          <p>Moderator</p>
+          <p class="team-member-quote">"Proud to be part of this amazing journey with our wonderful community!"</p>
+        </div>
+        <div class="team-member" data-role="website-developer">
+          <img src="res/qrexxed.png" alt="Qrexxed">
+          <h3>Qrexxed</h3>
+          <p>Website Developer</p>
+          <p class="team-member-quote">"Crafting digital experiences that bring our community closer together."</p>
+        </div>
+      </div>
+    </section>
+  
+    <section id="donate" class="donate">
+      <h2 class="donate-title">Made possible by you</h2>
+      <p class="donate-text">
+        Blockman Forge is <span class="org-gradient">not owned by an organization</span> but is driven by the community & Team.
+      </p>
+      <p class="donate-text">
+        The development is only possible thanks to <span class="support-gradient">your support</span>
+      </p>
+      
+      <a href="https://ko-fi.com/moonsveil" class="sponsor-button">
+        <svg class="heart-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        Become a sponsor
+      </a>
+      
+      <div class="donate-buttons">
+        <a href="https://boosty.to/moonsveil" class="donate-button">Boosty</a>
+        <p class="alternative-text">Or support us through Boosty, your choice matters!</p>
+      </div>
+      
+      <p class="thank-you">Thank you for supporting us!</p>
+    </section>
+  
+    <section id="tos" class="tos">
+      <div class="tos-header">
+        <div class="tos-title">
+          <h2>Terms of Service</h2>
+          <h1>Blockman Forge</h1>
+        </div>
+        <div class="tos-acceptance">
+          <p>Your acceptance is <span class="crucial-gradient">crucial</span>.</p>
+          <p>These Terms of Service outline the rules for accessing and using our services. By continuing to use them, you agree to comply with these terms.</p>
+        </div>
+      </div>
+  
+      <div class="tos-content">
+        <div class="term-box">
+          <h3>1. Introduction</h3>
+          <p>Hey there! Thanks for using Blockman Forge, a community-driven project created by Moonsveil. By using Blockman Forge, you're agreeing to these Terms of Service ("Terms"). Please read them carefully before using Blockman Forge.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>2. Intellectual Property</h3>
+          <p>Blockman Forge is a fork of the classic Blockman GO, built upon the 10039 engine. While we are inspired by Blockman GO, we have made significant changes and improvements to create a unique gaming experience. Therefore, while the inspiration is drawn from Blockman GO, Blockman Forge is not a direct copy of it, making our development legal. We do not own the rights to Blockman GO, and this is not a private server. All intellectual property rights, including but not limited to characters, names, places, and other aspects of Blockman GO, remain with their respective owners.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>3. Using Blockman Forge</h3>
+          <p>Blockman Forge is for entertainment purposes only. Don't use it for commercial or malicious purposes, and don't try to damage, disable, overburden, or impair the game or interfere with anyone else's use of it.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>4. Your Account</h3>
+          <p>If you create an account, you're responsible for keeping it safe and secure. Don't share your password or account info with anyone, and let us know if you think someone's using your account without permission.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>5. User-Generated Content</h3>
+          <p>When you upload content to Blockman Forge, you're giving us permission to use, modify, and distribute it to make the game better. You still own the content, but we need this permission to make sure everything runs smoothly.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>6. Device ID Usage</h3>
+          <p>To enhance the security of your account, we may use your device ID to prevent unauthorized access. When device lock is enabled, only authorized devices will be able to log in to your account. This helps us ensure that unknown individuals cannot access your account.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>7. Device Location</h3>
+          <p>We may collect your device location to optimize your experience by connecting you to the nearest server based on your geographical region. This helps improve game performance and ensures a smoother gameplay experience.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>8. No Warranty</h3>
+          <p>Blockman Forge is provided "as is" and "as available." We don't promise that it'll be perfect, and we're not responsible if it doesn't work as expected.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>9. Liability</h3>
+          <p>We're not liable for any damages or losses arising from your use of Blockman Forge. You agree to hold us harmless from any claims, demands, or damages arising from your use of the game.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>10. Termination</h3>
+          <p>We can terminate or suspend your access to Blockman Forge at any time, without notice, if we think you've violated these Terms.</p>
+        </div>
+  
+        <div class="term-box">
+          <h3>11. Changes to Terms</h3>
+          <p>We can change these Terms at any time. If we do, we'll let you know by posting an updated version on our website. Your continued use of Blockman Forge after any changes to these Terms will mean you accept the revised Terms.</p>
+        </div>
+      </div>
+    </section>
+  
+    <section class="footer">
+      <div class="footer-text">
+        <h2>Build the future,<br>
+        <span class="together">together</span></h2>
+      </div>
+      
+      <div class="footer-buttons">
+        <a href="https://www.moonsveil.xyz/download" class="footer-button download-button">
+          Download Now
+        </a>
+        <a href="https://discord.gg/moonsveil" class="footer-button discord-button">
+          <svg class="discord-icon" viewBox="0 0 24 24">
+            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3847-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+          </svg>
+          Join Discord
+        </a>
+      </div>
+    </section>
+  
+    <div class="built-with">
+      Built with 💖 by <span class="moonsveil">Moonsveil</span>
+    </div>
+  </body></html>

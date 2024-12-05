@@ -1,0 +1,311 @@
+<html><head><meta charset="UTF-8"><title>Moonsveil - Devlog</title>
+    <link rel="icon" type="image/png" href="moonsveil.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+      --primary: #2a2d3e;
+      --secondary: #1a1b26;
+      --accent: #7aa2f7;
+      --text: #c0caf5;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+      background: var(--secondary);
+      color: var(--text);
+    }
+    
+    .navbar {
+      background: rgba(42, 45, 62, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo img {
+      height: 30px; /* Slightly reduced from 35px */
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropbtn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: inherit;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: rgba(42, 45, 62, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: var(--text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-content a:hover {
+      background: var(--accent);
+      color: var(--secondary);
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+      color: var(--accent);
+    }
+    
+    .devlog-header {
+      padding-top: 120px;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .devlog-title {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #7dcfff, #bb9af7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+      text-shadow: 0 0 20px rgba(122, 162, 247, 0.3);
+    }
+    
+    .devlog-subtitle {
+      font-size: 1.2rem;
+      color: var(--text);
+      opacity: 0.9;
+    }
+    
+    .devlog-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .devlog-entry {
+      background: var(--primary);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      border: 1px solid rgba(122, 162, 247, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .devlog-entry:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 
+        0 0 30px rgba(122, 162, 247, 0.3),
+        0 0 60px rgba(187, 154, 247, 0.2);
+      border: 1px solid rgba(122, 162, 247, 0.3);
+      background: rgba(42, 45, 62, 0.85);
+    }
+    
+    .devlog-entry h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    
+    .devlog-entry p {
+      line-height: 1.6;
+      color: var(--text);
+    }
+    
+    .footer {
+      padding: 4rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-text {
+      flex: 1;
+    }
+    
+    .footer-text h2 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-text .together {
+      background: linear-gradient(45deg, #7dcfff, #7aa2f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+    
+    .footer-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .footer-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .download-button {
+      background: linear-gradient(45deg, #7dcfff, #7aa2f7);
+      color: white;
+      box-shadow: 0 0 20px rgba(122, 162, 247, 0.3);
+    }
+    
+    .download-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(122, 162, 247, 0.5);
+    }
+    
+    .discord-button {
+      background: #7289DA;
+      color: white;
+      box-shadow: 0 0 20px rgba(114, 137, 218, 0.3);
+    }
+    
+    .discord-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(114, 137, 218, 0.5);
+    }
+    
+    .discord-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+    
+    .built-with {
+      text-align: center;
+      padding: 2rem;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+    }
+    
+    .moonsveil {
+      background: linear-gradient(45deg, #7dcfff, #bb9af7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+      text-shadow: 0 0 20px rgba(122, 162, 247, 0.5);
+      filter: drop-shadow(0 0 10px rgba(122, 162, 247, 0.3));
+    }
+    </style>
+    </head>
+    <body>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="moonsveil.png" alt="Moonsveil Logo">
+        </div>
+        <div class="nav-links">
+          <a href="https://moonsveil.qrexxed.me" class="nav-link">Home</a>
+          <a href="https://moonsveil.qrexxed.me/devlog.html" class="nav-link">Devlog</a>
+          <a href="https://moonsveil.qrexxed.me/download.html" class="nav-link">Downloads</a>
+          <a href="https://moonsveil.qrexxed.me/gratitude-list.html" class="nav-link">Gratitude List</a>
+          <div class="dropdown">
+            <button class="nav-link dropbtn">Donation</button>
+            <div class="dropdown-content">
+              <a href="https://ko-fi.com/moonsveil">Ko-fi</a>
+              <a href="https://boosty.to/moonsveil">Boosty</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="devlog-header">
+        <h1 class="devlog-title">Latest Updates</h1>
+        <p class="devlog-subtitle">Update of Blockman Forge from our Developers</p>
+      </div>
+    
+      <div class="devlog-container">
+        <div class="devlog-entry">
+          <h2>🌟 Version 1.0.0 - Grown-up's Paradise 🌟</h2>
+          <p>Join our legendary Discord Server to embark on this thrilling journey and stay on the cutting edge of updates! Your adventure awaits...</p>
+        </div>
+      </div>
+    
+      <div class="built-with">
+        Built with 💖 by <span class="moonsveil">Moonsveil</span>
+      </div>
+    </body></html>

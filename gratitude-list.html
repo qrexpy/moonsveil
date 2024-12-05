@@ -1,0 +1,351 @@
+<html><head><meta charset="UTF-8"><title>Moonsveil - Our Team</title>
+    <link rel="icon" type="image/png" href="res/moonsveil.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+      --primary: #2a2d3e;
+      --secondary: #1a1b26;
+      --accent: #7aa2f7;
+      --text: #c0caf5;
+      --owner-glow: rgba(255, 0, 0, 0.4);
+      --co-owner-glow: rgba(0, 102, 255, 0.4);
+      --project-exec-glow: rgba(255, 153, 0, 0.4);
+      --moderator-glow: rgba(102, 179, 255, 0.4);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+      background: var(--secondary);
+      color: var(--text);
+    }
+    
+    .navbar {
+      background: rgba(42, 45, 62, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo img {
+      height: 30px;
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropbtn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: inherit;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: rgba(42, 45, 62, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: var(--text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-content a:hover {
+      background: var(--accent);
+      color: var(--secondary);
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+      color: var(--accent);
+    }
+    
+    .team-header {
+      padding-top: 120px;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .team-title {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .team-title span {
+      background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+      text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+    }
+    
+    .team-subtitle {
+      font-size: 1.2rem;
+      color: var(--text);
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .team-member {
+      background: var(--primary);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .team-member.owner:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 40px var(--owner-glow), 
+                  0 0 80px var(--owner-glow);
+    }
+    
+    .team-member.co-owner:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 40px var(--co-owner-glow),
+                  0 0 80px var(--co-owner-glow);
+    }
+    
+    .team-member.project-executive:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 40px var(--project-exec-glow),
+                  0 0 80px var(--project-exec-glow);
+    }
+    
+    .team-member.moderator:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 40px var(--moderator-glow),
+                  0 0 80px var(--moderator-glow);
+    }
+    
+    .member-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      object-fit: cover;
+    }
+    
+    .member-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .member-role {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .owner .member-role {
+      background: linear-gradient(45deg, #5c0000, #ff0000);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5),
+                   0 0 20px rgba(255, 0, 0, 0.3);
+      font-weight: bold;
+    }
+    
+    .co-owner .member-role {
+      background: linear-gradient(45deg, #00b4b4, #0066ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0, 102, 255, 0.5),
+                   0 0 20px rgba(0, 102, 255, 0.3);
+      font-weight: bold;
+    }
+    
+    .project-executive .member-role {
+      background: linear-gradient(45deg, #ff9900, #ff0000);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(255, 153, 0, 0.5),
+                   0 0 20px rgba(255, 153, 0, 0.3);
+      font-weight: bold;
+    }
+    
+    .moderator .member-role {
+      background: linear-gradient(45deg, #66b3ff, #003366);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(102, 179, 255, 0.5),
+                   0 0 20px rgba(102, 179, 255, 0.3);
+      font-weight: bold;
+    }
+    
+    .member-quote {
+      font-style: italic;
+      color: #a9b1d6;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-top: 1rem;
+    }
+    
+    .built-with {
+      text-align: center;
+      padding: 2rem;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+    }
+    
+    .moonsveil {
+      background: linear-gradient(45deg, #7dcfff, #bb9af7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(122, 162, 247, 0.5);
+    }
+    </style>
+    </head>
+    <body>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="res/moonsveil.png" alt="Moonsveil Logo">
+        </div>
+        <div class="nav-links">
+          <a href="https://moonsveil.qrexxed.me" class="nav-link">Home</a>
+          <a href="https://moonsveil.qrexxed.me/devlog.html" class="nav-link">Devlog</a>
+          <a href="https://moonsveil.qrexxed.me/download.html" class="nav-link">Downloads</a>
+          <a href="https://moonsveil.qrexxed.me/gratitude-list.html" class="nav-link">Gratitude List</a>
+          <div class="dropdown">
+            <button class="nav-link dropbtn">Donation</button>
+            <div class="dropdown-content">
+              <a href="https://ko-fi.com/moonsveil">Ko-fi</a>
+              <a href="https://boosty.to/moonsveil">Boosty</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="team-header">
+        <h1 class="team-title">Our Grateful <span>Team</span></h1>
+        <p class="team-subtitle">Celebrating the incredible contributions of our team members at Blockman Forge.</p>
+      </div>
+    
+      <div class="team-grid">
+        <div class="team-member owner">
+          <img src="drej.webp" alt="Drej" class="member-image">
+          <h2 class="member-name">Drej (Axton)</h2>
+          <div class="member-role">Owner</div>
+          <p class="member-quote">A huge thank you to our amazing community!</p>
+        </div>
+    
+        <div class="team-member co-owner">
+          <img src="rchyx.webp" alt="Rchyx" class="member-image">
+          <h2 class="member-name">Rchyx</h2>
+          <div class="member-role">Co-Owner</div>
+          <p class="member-quote">Together, we're cooking something truly special in Blockman Forge!</p>
+        </div>
+    
+        <div class="team-member co-owner">
+          <img src="zvyne.webp" alt="Zvyne" class="member-image">
+          <h2 class="member-name">Zvyne</h2>
+          <div class="member-role">Co-Owner</div>
+          <p class="member-quote">Every block you place and every idea you share helps us shape Blockman Forge! Thank you!</p>
+        </div>
+    
+        <div class="team-member project-executive">
+          <img src="neluxe.webp" alt="Neluxe" class="member-image">
+          <h2 class="member-name">Neluxe</h2>
+          <div class="member-role">Project Executive</div>
+          <p class="member-quote">Can't sleep tonight; we are preparing for the future in Blockman Forge!</p>
+        </div>
+    
+        <div class="team-member moderator">
+          <img src="arief.webp" alt="Arief" class="member-image">
+          <h2 class="member-name">Arief</h2>
+          <div class="member-role">Moderator</div>
+          <p class="member-quote">Excited for the community to play Blockman Forge!</p>
+        </div>
+      </div>
+    
+      <div class="built-with">
+        Built with 💖 by <span class="moonsveil">Moonsveil</span>
+      </div>
+    </body></html>

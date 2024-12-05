@@ -1,0 +1,301 @@
+<html><head><base href="https://www.moonsveil.xyz/"><title>Moonsveil - Terms of Service</title>
+<link rel="icon" type="image/png" href="res/moonsveil.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2a2d3e;
+  --secondary: #1a1b26;
+  --accent: #7aa2f7;
+  --text: #c0caf5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--secondary);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.navbar {
+  background: rgba(42, 45, 62, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo img {
+  height: 30px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(42, 45, 62, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: var(--text);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background: var(--accent);
+  color: var(--secondary);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color: var(--accent);
+}
+
+.tos-container {
+  padding: 120px 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+
+.tos-title {
+  flex: 1;
+}
+
+.tos-label {
+  font-size: 1rem;
+  color: var(--text);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.tos-game-title {
+  font-size: 3.5rem;
+  background: linear-gradient(45deg, #7dcfff, #2ac3de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(45, 195, 222, 0.3);
+}
+
+.tos-acceptance {
+  flex: 1;
+  text-align: right;
+  padding-top: 1rem;
+}
+
+.important-text {
+  background: linear-gradient(45deg, #f7768e, #ff0000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(247, 118, 142, 0.5);
+  font-weight: bold;
+}
+
+.tos-terms {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.term-box {
+  background: var(--primary);
+  padding: 2rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.term-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(122, 162, 247, 0.2);
+}
+
+.term-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.term-content {
+  line-height: 1.6;
+}
+
+.tos-footer {
+  text-align: center;
+  margin-top: 3rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.footer-note {
+  margin-top: 1.5rem;
+}
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="res/moonsveil.png" alt="Moonsveil Logo">
+    </div>
+    <div class="nav-links">
+      <a href="https://moonsveil.qrexxed.me" class="nav-link">Home</a>
+      <a href="https://moonsveil.qrexxed.me/devlog.html" class="nav-link">Devlog</a>
+      <a href="https://moonsveil.qrexxed.me/download.html" class="nav-link">Downloads</a>
+      <a href="https://moonsveil.qrexxed.me/gratitude-list.html" class="nav-link">Gratitude List</a>
+      <div class="dropdown">
+        <button class="nav-link dropbtn">Donation</button>
+        <div class="dropdown-content">
+          <a href="https://ko-fi.com/moonsveil">Ko-fi</a>
+          <a href="https://boosty.to/moonsveil">Boosty</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="tos-container">
+    <div class="tos-header">
+      <div class="tos-title">
+        <div class="tos-label">Terms of Service</div>
+        <h1 class="tos-game-title">Blockman Forge</h1>
+      </div>
+      <div class="tos-acceptance">
+        <p>Your acceptance is <span class="important-text">important</span>.</p>
+        <p>These Terms of Service govern your access and use of our services. By using our services, you agree to comply with these terms.</p>
+      </div>
+    </div>
+
+    <div class="tos-terms">
+      <div class="term-box">
+        <h2 class="term-title">1. Introduction</h2>
+        <p class="term-content">Hey there! Thanks for using Blockman Forge, a community-driven project created by Moonsveil. By using Blockman Forge, you're agreeing to these Terms of Service ("Terms"). Please read them carefully before using Blockman Forge.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">2. User Responsibilities</h2>
+        <p class="term-content">As a user, you are responsible for your own actions while using Blockman Forge. Please ensure you respect the community guidelines and fellow users.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">3. Account Security</h2>
+        <p class="term-content">You are responsible for maintaining the confidentiality of your account and password. Please notify us immediately of any unauthorized use of your account.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">4. Content Policy</h2>
+        <p class="term-content">All content created and shared within Blockman Forge must comply with our community guidelines. Offensive or inappropriate content will not be tolerated.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">5. Intellectual Property</h2>
+        <p class="term-content">All intellectual property rights in Blockman Forge and its content are owned by Moonsveil. You may not use any of our trademarks or content without permission.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">6. Limitation of Liability</h2>
+        <p class="term-content">Moonsveil is not liable for any damages arising from your use of Blockman Forge. Use at your own risk.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">7. Termination</h2>
+        <p class="term-content">We reserve the right to terminate your access to Blockman Forge at any time, without notice, for any reason.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">8. Changes to Terms</h2>
+        <p class="term-content">We may update these Terms from time to time. We will notify you of any changes, and your continued use of Blockman Forge constitutes acceptance of the new Terms.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">9. Governing Law</h2>
+        <p class="term-content">These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Moonsveil operates.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">10. Contact Us</h2>
+        <p class="term-content">If you have any questions about these Terms, please contact us through the support channels provided in Blockman Forge.</p>
+      </div>
+      <div class="term-box">
+        <h2 class="term-title">11. Acceptance of Terms</h2>
+        <p class="term-content">By using Blockman Forge, you acknowledge that you've read, understood, and agree to be bound by these Terms.</p>
+      </div>
+    </div>
+
+    <div class="tos-footer">
+      <p>By using Blockman Forge, you acknowledge that you've read, understood, and agree to be bound by these Terms.</p>
+      <p class="footer-note">Thanks for playing! We're glad you're part of the Blockman Forge community. Let's have fun and be respectful to each other!</p>
+    </div>
+  </div>
+</body></html>
